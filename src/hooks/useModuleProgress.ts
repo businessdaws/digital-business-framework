@@ -3,12 +3,12 @@ import { supabase, isSupabaseConnected } from '../lib/supabase';
 import { ModuleProgress } from '../types';
 
 const FALLBACK_MODULES: ModuleProgress[] = [
-  { module_id: 'ideation', completed: 0, total: 4, business_id: 'fallback' },
-  { module_id: 'blueprint', completed: 0, total: 5, business_id: 'fallback' },
-  { module_id: 'comms', completed: 0, total: 5, business_id: 'fallback' },
-  { module_id: 'execution', completed: 0, total: 4, business_id: 'fallback' },
-  { module_id: 'sustainability', completed: 0, total: 3, business_id: 'fallback' },
-  { module_id: 'risk', completed: 0, total: 3, business_id: 'fallback' },
+  { module_key: 'ideation', completed_tasks: 0, total_tasks: 4, business_id: 'fallback' },
+  { module_key: 'blueprint', completed_tasks: 0, total_tasks: 5, business_id: 'fallback' },
+  { module_key: 'comms', completed_tasks: 0, total_tasks: 5, business_id: 'fallback' },
+  { module_key: 'execution', completed_tasks: 0, total_tasks: 4, business_id: 'fallback' },
+  { module_key: 'sustainability', completed_tasks: 0, total_tasks: 3, business_id: 'fallback' },
+  { module_key: 'risk', completed_tasks: 0, total_tasks: 3, business_id: 'fallback' },
 ];
 
 export function useModuleProgress() {
@@ -58,8 +58,8 @@ export function useModuleProgress() {
 
         if (data && data.length > 0) {
           setModules(data);
-          const totalCompleted = data.reduce((acc: number, curr: any) => acc + (curr.completed || 0), 0);
-          const totalTasks = data.reduce((acc: number, curr: any) => acc + (curr.total || 0), 0);
+          const totalCompleted = data.reduce((acc: number, curr: any) => acc + (curr.completed_tasks || 0), 0);
+          const totalTasks = data.reduce((acc: number, curr: any) => acc + (curr.total_tasks || 0), 0);
           if (totalTasks > 0) {
             setGlobalProgress(Math.round((totalCompleted / totalTasks) * 100));
           }

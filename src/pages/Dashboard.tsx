@@ -48,8 +48,8 @@ export default function Dashboard() {
           </div>
 
           <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 font-mono text-sm space-y-2 text-zinc-300">
-            <p className="text-brand-blue">VITE_SUPABASE_URL=https://orpndwurqunbydtqoblu.supabase.co</p>
-            <p className="text-brand-yellow">VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ycG5kd3VycXVuYnlkdHFvYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NDIzNDksImV4cCI6MjA5NDIxODM0OX0.BdUUjqvuozOaiPGvB1paNH3Anm-ETCVy9jMxD7ioF6I</p>
+            <p className="text-brand-blue">VITE_SUPABASE_URL=https://your-project.supabase.co</p>
+            <p className="text-brand-yellow">VITE_SUPABASE_ANON_KEY=your-anon-key-here</p>
           </div>
 
           <div className="pt-4">
@@ -118,23 +118,21 @@ export default function Dashboard() {
               Transform Your Business Growth Vision. High-fidelity business engineering.
             </p>
           </div>
-          <div className="hidden lg:flex items-center gap-8 py-2 px-6 rounded-2xl glass-card glow-blue">
+          <div className="hidden lg:flex items-center gap-8 py-4 px-6 rounded-2xl glass-card glow-blue">
             <div>
-              <p className="text-[10px] text-zinc-500 font-bold tracking-[0.1em] uppercase">Market Pulse</p>
+              <p className="text-[10px] text-zinc-400 font-bold tracking-[0.1em] uppercase mb-1">Global Progress</p>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-brand-blue">8.4x</span>
-                <span className="text-[10px] text-green-500 font-mono">+12%</span>
+                <span className="text-3xl font-bold text-brand-blue tabular-nums">{globalProgress}%</span>
               </div>
             </div>
-            <div className="w-[100px] h-[40px] flex items-end gap-1">
-              {[40, 20, 60, 30, 80, 50, 90].map((h, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ height: 0 }}
-                  animate={{ height: `${h}%` }}
-                  className="w-full bg-brand-blue/20 rounded-t-sm"
-                />
-              ))}
+            <div className="w-px h-10 bg-zinc-800" />
+            <div>
+              <p className="text-[10px] text-zinc-400 font-bold tracking-[0.1em] uppercase mb-1">Modules Active</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-bold text-white tabular-nums">
+                  {dbProgress.filter(p => p.completed_tasks > 0).length}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -145,10 +143,10 @@ export default function Dashboard() {
         {FRAMEWORK_MODULES.map((module, index) => {
           const Icon = iconMap[module.icon];
           const isGrowth = module.id === 'growth' || module.id === 'execution';
-          const dbMod = dbProgress.find(p => p.module_id === module.id);
+          const dbMod = dbProgress.find(p => p.module_key === module.id);
           
           const percent = dbMod 
-            ? Math.round((dbMod.completed / dbMod.total) * 100) 
+            ? Math.round((dbMod.completed_tasks / dbMod.total_tasks) * 100) 
             : 0;
 
           return (
@@ -221,51 +219,25 @@ export default function Dashboard() {
         })}
       </div>
 
-      {/* Corporate Strategy Summary & Activity Log */}
+      {/* Quick Actions & Activity Log */}
       <section className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 p-10 rounded-[40px] glass-card glow-yellow relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-8">
-            <TrendingUp className="w-24 h-24 text-brand-yellow/5" />
-          </div>
-          
-          <h2 className="text-2xl font-bold mb-8 uppercase italic flex items-center gap-3">
-            <span className="w-1.5 h-6 bg-brand-yellow rounded-full" />
-            Executive Directive
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <p className="text-[10px] text-zinc-500 font-bold tracking-[0.2em] uppercase">Strategic Priority</p>
-                <p className="text-lg font-medium text-white italic">Accelerate "Blueprint" phase to finalize supply chain SOPs for investor due diligence.</p>
-              </div>
-              <div className="pt-6 border-t border-zinc-800 flex items-center justify-between">
-                <div>
-                  <p className="text-[10px] text-zinc-500 font-bold uppercase">Health Index</p>
-                  <p className="text-2xl font-bold text-green-500">OPTIMAL</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-[10px] text-zinc-500 font-bold uppercase">Risks</p>
-                  <p className="text-2xl font-bold text-zinc-400">LOW</p>
-                </div>
-              </div>
-            </div>
+        <div className="lg:col-span-2 p-10 rounded-[40px] glass-card glow-blue relative overflow-hidden">
+          <div className="relative z-10">
+            <h2 className="text-2xl font-bold mb-8 uppercase italic flex items-center gap-3">
+              <span className="w-1.5 h-6 bg-brand-blue rounded-full" />
+              Quick Actions
+            </h2>
             
-            <div className="bg-zinc-950/50 p-6 rounded-3xl border border-zinc-800/50 flex flex-col justify-between">
-              <h4 className="text-xs font-bold text-brand-blue tracking-widest uppercase mb-4">Financial projection v1.0</h4>
-              <div className="flex items-end h-24 gap-2 mb-4">
-                {[30, 45, 25, 60, 85, 40, 70, 95].map((val, i) => (
-                  <motion.div 
-                    key={i}
-                    initial={{ scaleY: 0 }}
-                    animate={{ scaleY: 1 }}
-                    transition={{ delay: 0.5 + (i * 0.05) }}
-                    className="flex-1 bg-brand-blue/30 border-t-2 border-brand-blue rounded-t-sm"
-                    style={{ height: `${val}%` }}
-                  />
-                ))}
-              </div>
-              <p className="text-xs text-zinc-500 italic">Projected 34% growth in ARR post-validation phase.</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {FRAMEWORK_MODULES.map((module) => (
+                <Link 
+                  key={module.id} 
+                  to={module.path}
+                  className="p-4 rounded-2xl bg-zinc-950/50 border border-zinc-800 hover:border-brand-blue/50 hover:bg-brand-blue/5 transition-all text-sm font-medium uppercase italic tracking-tight"
+                >
+                  Go to {module.title.split(' ')[0]}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
