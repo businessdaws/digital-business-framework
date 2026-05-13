@@ -29,11 +29,12 @@ const iconMap: Record<string, any> = {
 };
 
 export default function Dashboard() {
-  const { modules: dbProgress, globalProgress, isLoading: modulesLoading, error: modulesError } = useModuleProgress();
-  const { logs, isLoading: logsLoading, error: logsError } = useActivityLog();
+  const { modules: dbProgress, globalProgress, isLoading: modulesLoading, error: modulesError, isOffline: modulesOffline } = useModuleProgress();
+  const { logs, isLoading: logsLoading, error: logsError, isOffline: logsOffline } = useActivityLog();
 
-  const isLoading = modulesLoading || logsLoading;
+  const isActuallyLoading = (modulesLoading || logsLoading) && !modulesOffline;
   const error = (modulesError || logsError) && (modulesError !== 'Supabase not configured' && logsError !== 'Supabase not configured') ? (modulesError || logsError) : null;
+  const isOffline = modulesOffline || logsOffline;
 
   if (!isSupabaseConnected) {
     return (
@@ -61,7 +62,7 @@ export default function Dashboard() {
     );
   }
 
-  if (error) {
+  if (error && !isOffline) {
     return (
       <div className="h-[60vh] flex flex-col items-center justify-center text-center space-y-6">
         <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center">
@@ -86,6 +87,17 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-12">
+      {isOffline && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-brand-yellow/10 border border-brand-yellow/20 px-6 py-3 rounded-2xl flex items-center justify-center gap-3 text-brand-yellow text-sm font-bold uppercase italic tracking-wider"
+        >
+          <div className="w-2 h-2 rounded-full bg-brand-yellow animate-pulse" />
+          Running in offline mode — Supabase not connected
+        </motion.div>
+      )}
+
       {/* High-Contrast Global Progress Bar at Top */}
       <div className="sticky top-0 z-40 bg-zinc-950/80 backdrop-blur-xl py-4 -mt-4 mb-8">
         <ProgressBar 
@@ -148,7 +160,7 @@ export default function Dashboard() {
             >
               <Link to={module.path} className="group block focus:outline-none h-full">
                 <div className="p-8 rounded-[32px] glass-card glass-hover relative overflow-hidden group-hover:glow-blue transition-all duration-500 h-full flex flex-col">
-                  {isLoading && (
+                  {isActuallyLoading && (
                     <div className="absolute inset-0 bg-zinc-950/20 backdrop-blur-[2px] flex items-center justify-center z-20">
                       <Loader2 className="w-6 h-6 animate-spin text-brand-blue/30" />
                     </div>
@@ -260,7 +272,7 @@ export default function Dashboard() {
 
         <div className="space-y-6">
            <div className="p-8 rounded-[32px] glass-card h-full bg-zinc-900/50 border border-zinc-800/50 relative overflow-hidden min-h-[300px]">
-             {isLoading && (
+             {isActuallyLoading && (
                <div className="absolute inset-0 bg-zinc-950/20 backdrop-blur-[2px] flex items-center justify-center z-20">
                  <Loader2 className="w-6 h-6 animate-spin text-brand-blue/30" />
                </div>
