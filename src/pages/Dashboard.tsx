@@ -47,8 +47,8 @@ export default function Dashboard() {
           </div>
 
           <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 font-mono text-sm space-y-2 text-zinc-300">
-            <p className="text-brand-blue">VITE_SUPABASE_URL=https://your-project.supabase.co</p>
-            <p className="text-brand-yellow">VITE_SUPABASE_ANON_KEY=your-anon-key-here</p>
+            <p className="text-brand-blue">VITE_SUPABASE_URL=https://orpndwurqunbydtqoblu.supabase.co</p>
+            <p className="text-brand-yellow">VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ycG5kd3VycXVuYnlkdHFvYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NDIzNDksImV4cCI6MjA5NDIxODM0OX0.BdUUjqvuozOaiPGvB1paNH3Anm-ETCVy9jMxD7ioF6I</p>
           </div>
 
           <div className="pt-4">
