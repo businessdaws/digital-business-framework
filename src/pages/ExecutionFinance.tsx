@@ -27,7 +27,7 @@ import {
   Legend
 } from 'recharts';
 import { cn } from '../lib/utils';
-import { getManagerialInsights } from '../services/geminiService';
+import { generateStrategicAnalysis } from '../services/geminiService';
 
 const pnlData = [
   { month: 'Jan', profit: 4000, loss: 2400 },
@@ -60,7 +60,15 @@ export default function ExecutionFinance() {
   const fetchInsights = async () => {
     if (!insights) {
       setLoading(true);
-      const text = await getManagerialInsights({ pnlData, assetData });
+      const prompt = `As a Senior Business Analyst for Davsplace Studio, provide 3 short, high-level, bullet-point managerial insights based on this financial data:
+      PNL Data: ${JSON.stringify(pnlData)}
+      Asset Allocation: ${JSON.stringify(assetData)}
+      
+      Format your response as a simple list of 3 bullet points. 
+      Focus on growth, risk, and efficiency.
+      Keep it professional and encouraging for a business owner.`;
+      
+      const text = await generateStrategicAnalysis(prompt);
       setInsights(text);
       setLoading(false);
     }

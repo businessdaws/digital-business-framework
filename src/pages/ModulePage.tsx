@@ -3,7 +3,7 @@ import { FRAMEWORK_MODULES } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, Save, Send, Link as LinkIcon, Sparkles, Loader2, BrainCircuit } from 'lucide-react';
 import { useState } from 'react';
-import { getModuleStrategySummary } from '../services/geminiService';
+import { generateStrategicAnalysis } from '../services/geminiService';
 
 export default function ModulePage() {
   const { id } = useParams();
@@ -20,7 +20,14 @@ export default function ModulePage() {
 
   const handleRunAI = async () => {
     setLoading(true);
-    const summary = await getModuleStrategySummary(module.title, formData);
+    const prompt = `As a Senior Business Strategist for Davsplace Studio, provide a concise (2-3 sentences) summary of the strategic importance of the "${module.title}" module for a business owner.
+      Use the following context from their current progress:
+      ${JSON.stringify(formData)}
+      
+      Focus on how this specific module drives growth and investor readiness.
+      Keep the tone professional, minimalist, and visionary.`;
+      
+    const summary = await generateStrategicAnalysis(prompt);
     setAiSummary(summary);
     setLoading(false);
   };

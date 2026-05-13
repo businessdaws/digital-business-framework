@@ -11,11 +11,14 @@ import {
   Settings,
   HelpCircle,
   ChevronRight,
-  Users
+  Users,
+  LogOut
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { cn } from '../lib/utils';
 import { useModuleProgress } from '../hooks/useModuleProgress';
+import { supabase } from '../lib/supabase';
 import ProgressBar from './ProgressBar';
 
 const navItems = [
@@ -31,6 +34,18 @@ const navItems = [
 
 export default function Sidebar() {
   const { globalProgress } = useModuleProgress();
+  const [userEmail, setUserEmail] = useState<string>('');
+
+  useEffect(() => {
+    supabase?.auth.getUser().then(({ data }) => {
+      setUserEmail(data.user?.email || '');
+    });
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase?.auth.signOut();
+    window.location.href = '/login';
+  };
 
   return (
     <aside className="w-64 h-screen bg-zinc-950 border-r border-zinc-800 flex flex-col fixed left-0 top-0 z-50">
@@ -79,6 +94,27 @@ export default function Sidebar() {
       </div>
 
       <div className="mt-auto p-6 border-t border-zinc-800/50 space-y-4">
+        {userEmail && (
+          <div className="space-y-3">
+            <div className="bg-zinc-950 rounded-2xl p-3 border border-zinc-800 flex items-center gap-3">
+              <div className="w-8 h-8 bg-brand-yellow/10 border border-brand-yellow/20 rounded-full flex items-center justify-center text-brand-yellow text-[10px] font-black italic">
+                {userEmail.substring(0, 2).toUpperCase()}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] text-zinc-500 font-bold truncate lowercase">{userEmail}</p>
+                <span className="text-[8px] bg-brand-yellow/10 text-brand-yellow px-2 py-0.5 rounded-full font-bold uppercase tracking-widest italic">Owner</span>
+              </div>
+            </div>
+            <button 
+              onClick={handleSignOut}
+              className="w-full flex items-center gap-2 px-3 py-1 text-[10px] text-zinc-600 hover:text-red-400 font-bold uppercase tracking-[0.2em] italic transition-colors"
+            >
+              <LogOut className="w-3 h-3" />
+              Sign Out
+            </button>
+          </div>
+        )}
+
         <div className="space-y-1">
           <button className="w-full flex items-center gap-3 px-3 py-2 text-zinc-500 hover:text-brand-blue text-sm font-medium transition-colors">
             <Settings className="w-4 h-4" />

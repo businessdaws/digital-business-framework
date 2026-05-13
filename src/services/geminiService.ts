@@ -1,49 +1,35 @@
-import { GoogleGenAI } from "@google/genai";
-
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
-
-export async function getManagerialInsights(data: any) {
-  try {
-    const prompt = `
-      As a Senior Business Analyst for Davsplace Studio, provide 3 short, high-level, bullet-point managerial insights based on this financial data:
-      ${JSON.stringify(data)}
-      
-      Format your response as a simple list of 3 bullet points. 
-      Focus on growth, risk, and efficiency.
-      Keep it professional and encouraging for a business owner.
-    `;
-
-    const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
-      contents: prompt,
-    });
-
-    return response.text || "• Growth trajectory remains stable.\n• Monitor operational overhead strictly.\n• Opportunity detected in asset reallocation.";
-  } catch (error) {
-    console.error("Gemini Insight Error:", error);
-    return "• Growth trajectory remains stable.\n• Monitor operational overhead strictly.\n• Opportunity detected in asset reallocation.";
+export async function generateStrategicAnalysis(
+  prompt: string
+): Promise<string> {
+  const apiKey = (import.meta as any).env?.VITE_GEMINI_API_KEY || 
+                 (typeof process !== 'undefined' ? process.env?.VITE_GEMINI_API_KEY : '') || '';
+  
+  if (!apiKey) {
+    return 'AI analysis unavailable — add VITE_GEMINI_API_KEY to environment variables.';
   }
-}
 
-export async function getModuleStrategySummary(moduleTitle: string, formData: any) {
   try {
-    const prompt = `
-      As a Senior Business Strategist for Davsplace Studio, provide a concise (2-3 sentences) summary of the strategic importance of the "${moduleTitle}" module for a business owner.
-      Use the following context from their current progress:
-      ${JSON.stringify(formData)}
-      
-      Focus on how this specific module drives growth and investor readiness.
-      Keep the tone professional, minimalist, and visionary.
-    `;
-
-    const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
-      contents: prompt,
-    });
-
-    return response.text || "Strategic validation of this module ensures alignment between core business objectives and market reality, serving as a critical pillar for long-term scalability.";
-  } catch (error) {
-    console.error("Gemini Module Summary Error:", error);
-    return "Strategic validation of this module ensures alignment between core business objectives and market reality, serving as a critical pillar for long-term scalability.";
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{ text: prompt }]
+          }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 500,
+          }
+        })
+      }
+    );
+    const data = await response.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || 
+           'No analysis generated.';
+  } catch (err) {
+    console.error('Gemini Analysis Error:', err);
+    return 'Analysis failed. Check your API key and try again.';
   }
 }
