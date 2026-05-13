@@ -16,7 +16,6 @@ export default function Layout() {
           </div>
           
           <div className="flex items-center gap-6">
-            <LangToggle />
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600" />
               <input 
@@ -30,6 +29,7 @@ export default function Layout() {
                 <Bell className="w-4 h-4" />
               </button>
             </div>
+            <LangToggle />
             <div className="flex items-center gap-3 bg-zinc-900/50 border border-zinc-800/50 pl-2 pr-4 py-2 rounded-2xl backdrop-blur-md">
               <div className="w-8 h-8 rounded-xl bg-brand-blue flex items-center justify-center shadow-lg shadow-brand-blue/20">
                 <User className="w-4 h-4 text-white" />
