@@ -1,0 +1,375 @@
+export type Lang = 'id' | 'en'
+
+export const translations = {
+  id: {
+    // Sidebar
+    sidebar_title: 'Digital Framework',
+    sidebar_dashboard: 'Dasbor',
+    sidebar_investors: 'Investor',
+    sidebar_ideation: 'Ideasi',
+    sidebar_blueprint: 'Cetak Biru',
+    sidebar_communication: 'Komunikasi',
+    sidebar_execution: 'Eksekusi',
+    sidebar_growth: 'Pertumbuhan',
+    sidebar_risk: 'Risiko',
+    sidebar_settings: 'Pengaturan',
+    sidebar_support: 'Bantuan Ahli',
+    sidebar_signout: 'Keluar',
+    sidebar_system_integrity: 'INTEGRITAS SISTEM',
+
+    // Dashboard
+    hero_title_1: 'Pusat',
+    hero_title_2: 'Kendali',
+    hero_title_3: 'Strategis',
+    hero_subtitle: 'Wujudkan Visi Pertumbuhan Bisnis Anda. Rekayasa bisnis bermutu tinggi.',
+    global_progress: 'PROGRES GLOBAL',
+    modules_active: 'MODUL AKTIF',
+    business_readiness: 'Indeks Kesiapan Bisnis',
+    verified: 'Terverifikasi',
+    completion: 'PENYELESAIAN',
+
+    // Module titles
+    mod_ideation_title: 'Ideasi & Validasi',
+    mod_ideation_desc: 'Kesesuaian Masalah-Solusi, VPC, Ukuran Pasar.',
+    mod_blueprint_title: 'Cetak Biru',
+    mod_blueprint_desc: 'BMC Dinamis, SOP Digital, SDM Kunci.',
+    mod_comms_title: 'Komunikasi Eksternal',
+    mod_comms_desc: 'Profil Perusahaan, Pitch Deck, Visualisasi Data.',
+    mod_execution_title: 'Eksekusi & Keuangan',
+    mod_execution_desc: 'Mesin Prospek, Pelacak Keuangan.',
+    mod_growth_title: 'Keberlanjutan & Pertumbuhan',
+    mod_growth_desc: 'Peta Jalan SEO, Inovasi.',
+    mod_risk_title: 'Manajemen Risiko',
+    mod_risk_desc: 'ERM & Analisis.',
+
+    // Login
+    login_subtitle: 'Akses terbatas untuk tim Davsplace Studio',
+    login_email: 'Alamat Email',
+    login_password: 'Kata Sandi',
+    login_button: 'Masuk',
+    login_loading: 'Memverifikasi...',
+    login_error: 'Kredensial tidak valid. Hubungi administrator Anda.',
+    login_footer: 'Akses terbatas untuk tim Davsplace Studio',
+
+    // Ideation Page
+    ideation_title: 'Ideasi & Validasi',
+    ideation_subtitle: 'Kesesuaian Masalah-Solusi · VPC · Ukuran Pasar',
+    tab_psf: 'Kesesuaian Masalah-Solusi',
+    tab_vpc: 'Kanvas Proposisi Nilai',
+    tab_market: 'Ukuran Pasar',
+    save_progress: 'Simpan Progres',
+    saving: 'Menyimpan...',
+    saved: 'Tersimpan!',
+    generate_ai: 'Analisis dengan AI',
+    analyzing: 'Menganalisis...',
+    ai_output_label: 'Output Analisis AI',
+
+    // PSF fields
+    psf_problem_label: 'Pernyataan Masalah',
+    psf_problem_placeholder: 'Masalah kritis apa yang dihadapi target pasar Anda? Spesifik dan terukur.',
+    psf_customer_label: 'Target Pelanggan',
+    psf_customer_placeholder: 'Demografi, psikografi, pola perilaku',
+    psf_alternatives_label: 'Alternatif yang Ada',
+    psf_alternatives_placeholder: 'Bagaimana pelanggan memecahkan masalah ini sekarang? Apa celahnya?',
+    psf_solution_label: 'Solusi yang Diusulkan',
+    psf_solution_placeholder: 'Solusi Anda dan mengapa 10x lebih baik dari alternatif',
+    psf_advantage_label: 'Keunggulan Unik',
+    psf_advantage_placeholder: 'Apa yang membuat ini bertahan lama?',
+
+    // VPC fields
+    vpc_jobs_label: 'Pekerjaan Pelanggan',
+    vpc_jobs_placeholder: 'Tugas/tujuan apa yang ingin dicapai pelanggan Anda?',
+    vpc_pains_label: 'Hambatan Pelanggan',
+    vpc_pains_placeholder: 'Frustrasi, risiko, hambatan yang mereka hadapi',
+    vpc_gains_label: 'Keuntungan Pelanggan',
+    vpc_gains_placeholder: 'Hasil dan manfaat yang diinginkan',
+    vpc_products_label: 'Produk & Layanan',
+    vpc_products_placeholder: 'Daftar penawaran inti Anda',
+    vpc_pain_relievers_label: 'Penghilang Hambatan',
+    vpc_pain_relievers_placeholder: 'Bagaimana Anda menghilangkan/mengurangi hambatan?',
+    vpc_gain_creators_label: 'Pencipta Keuntungan',
+    vpc_gain_creators_placeholder: 'Bagaimana Anda menciptakan keuntungan pelanggan?',
+
+    // Market Sizing fields
+    market_industry_label: 'Industri/Pasar',
+    market_industry_placeholder: 'mis. Layanan Kreatif Digital, Asia Tenggara',
+    market_tam_label: 'TAM — Total Pasar yang Dapat Dialamatkan',
+    market_tam_placeholder: 'Estimasi total ukuran pasar (USD)',
+    market_tam_helper: 'Total potensi pasar jika Anda menguasai 100%',
+    market_sam_label: 'SAM — Pasar yang Dapat Dilayani',
+    market_sam_placeholder: 'Segmen yang realistis dapat dialamatkan (USD)',
+    market_sam_helper: 'Bagian dari TAM yang benar-benar bisa Anda targetkan',
+    market_som_label: 'SOM — Pasar yang Dapat Diraih',
+    market_som_placeholder: 'Perkiraan realistis 3 tahun (USD)',
+    market_som_helper: 'Yang realistis bisa Anda raih dalam 3 tahun',
+    market_assumption_label: 'Asumsi Utama',
+    market_assumption_placeholder: 'Apa asumsi utama di balik angka-angka ini?',
+
+    // Offline banner
+    offline_banner: 'Berjalan dalam mode offline — Supabase tidak terhubung',
+
+    // Extra Dashboard
+    quick_actions: 'Aksi Cepat',
+    go_to: 'Buka',
+    
+    // Ideation Page Labels
+    label_problem_analysis: 'Analisis Masalah',
+    label_strategic_mapping: 'Pemetaan Strategis',
+    label_market_validation: 'Validasi Pasar',
+    save_saving: 'Menyimpan...',
+    save_saved: 'Tersimpan',
+    
+    label_problem_statement: 'Pernyataan Masalah',
+    placeholder_problem_statement: 'Masalah kritis apa yang dihadapi target pasar Anda? Spesifik dan terukur.',
+    label_target_customer: 'Target Pelanggan',
+    placeholder_target_customer: 'Demografi, psikografi, pola perilaku',
+    label_current_alternatives: 'Alternatif Saat Ini',
+    placeholder_current_alternatives: 'Bagaimana pelanggan memecahkan masalah ini sekarang? Apa celahnya?',
+    label_proposed_solution: 'Solusi yang Diusulkan',
+    placeholder_proposed_solution: 'Solusi Anda dan mengapa 10x lebih baik dari alternatif',
+    label_unique_advantage: 'Keunggulan Unik',
+    placeholder_unique_advantage: 'Apa yang membuat ini bertahan lama?',
+    
+    label_customer_profile: 'Profil Pelanggan',
+    label_customer_jobs: 'Pekerjaan Pelanggan',
+    placeholder_customer_jobs: 'Tugas/tujuan apa yang ingin dicapai pelanggan Anda?',
+    label_customer_pains: 'Hambatan Pelanggan',
+    placeholder_customer_pains: 'Frustrasi, risiko, hambatan yang mereka hadapi',
+    label_customer_gains: 'Keuntungan Pelanggan',
+    placeholder_customer_gains: 'Hasil dan manfaat yang diinginkan',
+    
+    label_value_map: 'Peta Nilai',
+    label_products_services: 'Produk & Layanan',
+    placeholder_products_services: 'Daftar penawaran inti Anda',
+    label_pain_relievers: 'Penghilang Hambatan',
+    placeholder_pain_relievers: 'Bagaimana Anda menghilangkan/mengurangi hambatan?',
+    label_gain_creators: 'Pencipta Keuntungan',
+    placeholder_gain_creators: 'Bagaimana Anda menciptakan keuntungan pelanggan?',
+    
+    label_industry_market: 'Industri/Pasar',
+    placeholder_industry_market: 'mis. Layanan Kreatif Digital, Asia Tenggara',
+    label_market_tam: 'TAM (USD)',
+    desc_tam: 'Total potensi pasar jika Anda menguasai 100%',
+    label_market_sam: 'SAM (USD)',
+    desc_sam: 'Bagian dari TAM yang benar-benar bisa Anda targetkan',
+    label_market_som: 'SOM (USD)',
+    desc_som: 'Yang realistis bisa Anda raih dalam 3 tahun',
+    label_key_assumption: 'Asumsi Utama',
+    placeholder_key_assumption: 'Apa asumsi utama di balik angka-angka ini?',
+    
+    total_tam: 'TOTAL TAM',
+    reachable_sam: 'SAM TERJANGKAU',
+    som_capture: 'TANGKAPAN SOM',
+    som_tam_ratio: 'RASIO SOM/TAM',
+    stat_ambitious: 'Ambisius',
+    stat_conservative: 'Konservatif',
+    
+    gen_problem: 'Hasilkan Analisis Masalah',
+    gen_vpc: 'Hasilkan Analisis VPC',
+    gen_market: 'Validasi Ukuran Pasar',
+    
+    ai_strat_analysis: 'Analisis Strategis AI',
+    gen_now: 'Baru saja dihasilkan',
+    loading_ai: 'Komputasi Strategi...',
+    await_directive: 'Menunggu Instruksi',
+    await_desc: 'Lengkapi formulir dan klik hasilkan untuk menerima analisis rekayasa bisnis fidelitas tinggi.',
+    investor_ready: 'Siap untuk Investor',
+    export_analysis: 'Ekspor Analisis',
+    strat_protocol: 'Protokol Strategis',
+    tip_1: 'Fokus pada pernyataan berbasis data daripada pernyataan visi.',
+    tip_2: 'Kuantifikasi besarnya masalah jika memungkinkan.',
+    tip_3: 'Sangat spesifik dengan demografi target.',
+
+    // Auth
+    authenticating: 'Mengautentikasi...',
+  },
+
+  en: {
+    // Sidebar
+    sidebar_title: 'Digital Framework',
+    sidebar_dashboard: 'Dashboard',
+    sidebar_investors: 'Investors',
+    sidebar_ideation: 'Ideation',
+    sidebar_blueprint: 'Blueprint',
+    sidebar_communication: 'Communication',
+    sidebar_execution: 'Execution',
+    sidebar_growth: 'Growth',
+    sidebar_risk: 'Risk',
+    sidebar_settings: 'Settings',
+    sidebar_support: 'Expert Support',
+    sidebar_signout: 'Sign Out',
+    sidebar_system_integrity: 'SYSTEM INTEGRITY',
+
+    // Dashboard
+    hero_title_1: 'Strategic',
+    hero_title_2: 'Control',
+    hero_title_3: 'Center',
+    hero_subtitle: 'Transform Your Business Growth Vision. High-fidelity business engineering.',
+    global_progress: 'GLOBAL PROGRESS',
+    modules_active: 'MODULES ACTIVE',
+    business_readiness: 'Business Readiness Index',
+    verified: 'Verified',
+    completion: 'COMPLETION',
+
+    // Module titles
+    mod_ideation_title: 'Ideation & Validation',
+    mod_ideation_desc: 'Problem-Solution Fit, VPC, Market Sizing.',
+    mod_blueprint_title: 'The Blueprint',
+    mod_blueprint_desc: 'Dynamic BMC, SOP Digital, HR Key Resources.',
+    mod_comms_title: 'External Communication',
+    mod_comms_desc: 'Company Profile, Pitch Deck, Data Visualization.',
+    mod_execution_title: 'Execution & Finance',
+    mod_execution_desc: 'Leads Engine, Financial Tracker.',
+    mod_growth_title: 'Sustainability & Growth',
+    mod_growth_desc: 'SEO Roadmap, Innovation.',
+    mod_risk_title: 'Risk Management',
+    mod_risk_desc: 'ERM & Analysis.',
+
+    // Login
+    login_subtitle: 'Internal access only',
+    login_email: 'Email Address',
+    login_password: 'Password',
+    login_button: 'Authenticate',
+    login_loading: 'Verifying...',
+    login_error: 'Invalid credentials. Contact your administrator.',
+    login_footer: 'Access restricted to Davsplace Studio team',
+
+    // Ideation Page
+    ideation_title: 'Ideation & Validation',
+    ideation_subtitle: 'Problem-Solution Fit · VPC · Market Sizing',
+    tab_psf: 'Problem-Solution Fit',
+    tab_vpc: 'Value Proposition Canvas',
+    tab_market: 'Market Sizing',
+    save_progress: 'Save Progress',
+    saving: 'Saving...',
+    saved: 'Saved!',
+    generate_ai: 'Generate AI Analysis',
+    analyzing: 'Analyzing...',
+    ai_output_label: 'AI Analysis Output',
+
+    // PSF fields
+    psf_problem_label: 'Problem Statement',
+    psf_problem_placeholder: 'What critical problem does your target market face? Be specific and quantified.',
+    psf_customer_label: 'Target Customer',
+    psf_customer_placeholder: 'Demographics, psychographics, behavior patterns',
+    psf_alternatives_label: 'Current Alternatives',
+    psf_alternatives_placeholder: 'How are customers solving this problem today? What are the gaps?',
+    psf_solution_label: 'Proposed Solution',
+    psf_solution_placeholder: 'Your solution and why it is 10x better than alternatives',
+    psf_advantage_label: 'Unique Advantage',
+    psf_advantage_placeholder: 'What makes this defensible?',
+
+    // VPC fields
+    vpc_jobs_label: 'Customer Jobs',
+    vpc_jobs_placeholder: 'What tasks/goals is your customer trying to accomplish?',
+    vpc_pains_label: 'Customer Pains',
+    vpc_pains_placeholder: 'Frustrations, risks, obstacles they face',
+    vpc_gains_label: 'Customer Gains',
+    vpc_gains_placeholder: 'Desired outcomes and benefits they want',
+    vpc_products_label: 'Products & Services',
+    vpc_products_placeholder: 'List your core offerings',
+    vpc_pain_relievers_label: 'Pain Relievers',
+    vpc_pain_relievers_placeholder: 'How do you eliminate/reduce pains?',
+    vpc_gain_creators_label: 'Gain Creators',
+    vpc_gain_creators_placeholder: 'How do you create customer gains?',
+
+    // Market Sizing fields
+    market_industry_label: 'Industry/Market',
+    market_industry_placeholder: 'e.g. Digital Creative Services, Southeast Asia',
+    market_tam_label: 'TAM — Total Addressable Market',
+    market_tam_placeholder: 'Estimated total market size (USD)',
+    market_tam_helper: 'Total potential market if you captured 100%',
+    market_sam_label: 'SAM — Serviceable Available Market',
+    market_sam_placeholder: 'Realistic addressable segment (USD)',
+    market_sam_helper: 'The portion of TAM you can actually target',
+    market_som_label: 'SOM — Serviceable Obtainable Market',
+    market_som_placeholder: 'Your realistic 3-year capture (USD)',
+    market_som_helper: 'What you can realistically capture in 3 years',
+    market_assumption_label: 'Key Assumption',
+    market_assumption_placeholder: 'What is your main assumption behind these numbers?',
+
+    // Offline banner
+    offline_banner: 'Running in offline mode — Supabase not connected',
+
+    // Extra Dashboard
+    quick_actions: 'Quick Actions',
+    go_to: 'Go to',
+    
+    // Ideation Page Labels
+    label_problem_analysis: 'Problem Analysis',
+    label_strategic_mapping: 'Strategic Mapping',
+    label_market_validation: 'Market Validation',
+    save_saving: 'Saving...',
+    save_saved: 'Saved',
+    
+    label_problem_statement: 'Problem Statement',
+    placeholder_problem_statement: 'What critical problem does your target market face? Be specific and quantified.',
+    label_target_customer: 'Target Customer',
+    placeholder_target_customer: 'Demographics, psychographics, behavior patterns',
+    label_current_alternatives: 'Current Alternatives',
+    placeholder_current_alternatives: 'How are customers solving this problem today? What are the gaps?',
+    label_proposed_solution: 'Proposed Solution',
+    placeholder_proposed_solution: 'Your solution and why it is 10x better than alternatives',
+    label_unique_advantage: 'Unique Advantage',
+    placeholder_unique_advantage: 'What makes this defensible?',
+    
+    label_customer_profile: 'Customer Profile',
+    label_customer_jobs: 'Customer Jobs',
+    placeholder_customer_jobs: 'What tasks/goals is your customer trying to accomplish?',
+    label_customer_pains: 'Customer Pains',
+    placeholder_customer_pains: 'Frustrations, risks, obstacles they face',
+    label_customer_gains: 'Customer Gains',
+    placeholder_customer_gains: 'Desired outcomes and benefits they want',
+    
+    label_value_map: 'Value Map',
+    label_products_services: 'Products & Services',
+    placeholder_products_services: 'List your core offerings',
+    label_pain_relievers: 'Pain Relievers',
+    placeholder_pain_relievers: 'How do you eliminate/reduce pains?',
+    label_gain_creators: 'Gain Creators',
+    placeholder_gain_creators: 'How do you create customer gains?',
+    
+    label_industry_market: 'Industry/Market',
+    placeholder_industry_market: 'e.g. Digital Creative Services, Southeast Asia',
+    label_market_tam: 'TAM (USD)',
+    desc_tam: 'Total potential market if you captured 100%',
+    label_market_sam: 'SAM (USD)',
+    desc_sam: 'The portion of TAM you can actually target',
+    label_market_som: 'SOM (USD)',
+    desc_som: 'What you can realistically capture in 3 years',
+    label_key_assumption: 'Key Assumption',
+    placeholder_key_assumption: 'What is your main assumption behind these numbers?',
+    
+    total_tam: 'TOTAL TAM',
+    reachable_sam: 'REACHABLE SAM',
+    som_capture: 'SOM CAPTURE',
+    som_tam_ratio: 'SOM/TAM RATIO',
+    stat_ambitious: 'Ambitious',
+    stat_conservative: 'Conservative',
+    
+    gen_problem: 'Generate Problem Analysis',
+    gen_vpc: 'Generate VPC Analysis',
+    gen_market: 'Validate Market Sizing',
+    
+    ai_strat_analysis: 'AI Strategic Analysis',
+    gen_now: 'Generated just now',
+    loading_ai: 'Computing Strategy...',
+    await_directive: 'Awaiting Directive',
+    await_desc: 'Complete the form and click generate to receive a high-fidelity business engineering analysis.',
+    investor_ready: 'Investor Grade Ready',
+    export_analysis: 'Export Analysis',
+    strat_protocol: 'Strategic Protocol',
+    tip_1: 'Focus on data-driven assertions rather than vision statements.',
+    tip_2: 'Quantify problem magnitude whenever possible.',
+    tip_3: 'Be ultra-specific with target demographics.',
+
+    // Auth
+    authenticating: 'Authenticating...',
+  }
+}
+
+export type TranslationKey = keyof typeof translations.id
+
+export function t(lang: Lang, key: TranslationKey): string {
+  return translations[lang][key] || key
+}

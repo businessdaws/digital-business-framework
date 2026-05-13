@@ -19,22 +19,25 @@ import { useState, useEffect } from 'react';
 import { cn } from '../lib/utils';
 import { useModuleProgress } from '../hooks/useModuleProgress';
 import { supabase } from '../lib/supabase';
+import { useLang } from '../contexts/LangContext';
+import { t } from '../lib/i18n';
 import ProgressBar from './ProgressBar';
-
-const navItems = [
-  { name: 'Dashboard', path: '/', icon: LayoutDashboard },
-  { name: 'Investors', path: '/investors', icon: Users },
-  { name: 'Ideation', path: '/ideation', icon: Lightbulb },
-  { name: 'Blueprint', path: '/blueprint', icon: Map },
-  { name: 'Communication', path: '/communication', icon: MessageSquare },
-  { name: 'Execution', path: '/execution', icon: TrendingUp },
-  { name: 'Growth', path: '/growth', icon: Rocket },
-  { name: 'Risk', path: '/risk', icon: ShieldAlert },
-];
 
 export default function Sidebar() {
   const { globalProgress } = useModuleProgress();
   const [userEmail, setUserEmail] = useState<string>('');
+  const { lang } = useLang();
+
+  const navItems = [
+    { name: t(lang, 'sidebar_dashboard'), path: '/', icon: LayoutDashboard },
+    { name: t(lang, 'sidebar_investors'), path: '/investors', icon: Users },
+    { name: t(lang, 'sidebar_ideation'), path: '/ideation', icon: Lightbulb },
+    { name: t(lang, 'sidebar_blueprint'), path: '/blueprint', icon: Map },
+    { name: t(lang, 'sidebar_communication'), path: '/communication', icon: MessageSquare },
+    { name: t(lang, 'sidebar_execution'), path: '/execution', icon: TrendingUp },
+    { name: t(lang, 'sidebar_growth'), path: '/growth', icon: Rocket },
+    { name: t(lang, 'sidebar_risk'), path: '/risk', icon: ShieldAlert },
+  ];
 
   useEffect(() => {
     supabase?.auth.getUser().then(({ data }) => {
@@ -110,7 +113,7 @@ export default function Sidebar() {
               className="w-full flex items-center gap-2 px-3 py-1 text-[10px] text-zinc-600 hover:text-red-400 font-bold uppercase tracking-[0.2em] italic transition-colors"
             >
               <LogOut className="w-3 h-3" />
-              Sign Out
+              {t(lang, 'sidebar_signout')}
             </button>
           </div>
         )}
@@ -118,16 +121,16 @@ export default function Sidebar() {
         <div className="space-y-1">
           <button className="w-full flex items-center gap-3 px-3 py-2 text-zinc-500 hover:text-brand-blue text-sm font-medium transition-colors">
             <Settings className="w-4 h-4" />
-            <span className="tracking-tight">Settings</span>
+            <span className="tracking-tight">{t(lang, 'sidebar_settings')}</span>
           </button>
           <button className="w-full flex items-center gap-3 px-3 py-2 text-zinc-500 hover:text-brand-blue text-sm font-medium transition-colors">
             <HelpCircle className="w-4 h-4" />
-            <span className="tracking-tight">Expert Support</span>
+            <span className="tracking-tight">{t(lang, 'sidebar_support')}</span>
           </button>
         </div>
         
         <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 glow-blue">
-          <p className="text-[10px] text-brand-blue font-bold tracking-widest uppercase mb-2">SYSTEM INTEGRITY</p>
+          <p className="text-[10px] text-brand-blue font-bold tracking-widest uppercase mb-2">{t(lang, 'sidebar_system_integrity')}</p>
           <ProgressBar progress={globalProgress} variant="blue" />
         </div>
       </div>

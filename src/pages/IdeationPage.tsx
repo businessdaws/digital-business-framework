@@ -17,6 +17,8 @@ import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { generateStrategicAnalysis } from '../services/geminiService';
 import { cn } from '../lib/utils';
+import { useLang } from '../contexts/LangContext';
+import { t } from '../lib/i18n';
 
 const BUSINESS_ID = '00000000-0000-0000-0000-000000000001';
 
@@ -27,6 +29,7 @@ export default function IdeationPage() {
   const [loading, setLoading] = useState<Record<string, boolean>>({});
   const [aiAnalysis, setAiAnalysis] = useState<Record<string, string>>({});
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
+  const { lang } = useLang();
   
   const [formData, setFormData] = useState({
     // Problem-Solution Fit
@@ -304,9 +307,9 @@ Be specific with numbers. Under 250 words.`;
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-xl font-bold uppercase italic text-white flex items-center gap-3">
                 <span className="w-1.5 h-6 bg-brand-yellow rounded-full" />
-                {activeTab === 'problem' && "Problem Analysis"}
-                {activeTab === 'vpc' && "Strategic Mapping"}
-                {activeTab === 'market' && "Market Validation"}
+                {activeTab === 'problem' && t(lang, 'label_problem_analysis')}
+                {activeTab === 'vpc' && t(lang, 'label_strategic_mapping')}
+                {activeTab === 'market' && t(lang, 'label_market_validation')}
               </h2>
               <button 
                 onClick={() => handleSave(activeTab)}
@@ -317,55 +320,55 @@ Be specific with numbers. Under 250 words.`;
                 )}
               >
                 {saveStatus === 'saving' ? <Loader2 className="w-3 h-3 animate-spin" /> : saveStatus === 'saved' ? <CheckCircle2 className="w-3 h-3" /> : <Save className="w-3 h-3" />}
-                {saveStatus === 'saving' ? "Saving..." : saveStatus === 'saved' ? "Saved" : "Save Progress"}
+                {saveStatus === 'saving' ? t(lang, 'save_saving') : saveStatus === 'saved' ? t(lang, 'save_saved') : t(lang, 'save_progress')}
               </button>
             </div>
 
             {activeTab === 'problem' && (
               <div className="space-y-6">
                 <div className="space-y-2">
-                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Problem Statement</label>
+                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">{t(lang, 'label_problem_statement')}</label>
                    <textarea 
                     value={formData.problem}
                     onChange={(e) => handleInputChange('problem', e.target.value)}
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-3xl p-6 text-zinc-300 focus:outline-none focus:border-brand-yellow/50 min-h-[160px] resize-none"
-                    placeholder="What critical problem does your target market face? Be specific and quantified."
+                    placeholder={t(lang, 'placeholder_problem_statement')}
                    />
                 </div>
                 <div className="space-y-2">
-                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Target Customer</label>
+                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">{t(lang, 'label_target_customer')}</label>
                    <input 
                     value={formData.customer}
                     onChange={(e) => handleInputChange('customer', e.target.value)}
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-6 py-4 text-zinc-300 focus:outline-none focus:border-brand-yellow/50"
-                    placeholder="Demographics, psychographics, behavior patterns"
+                    placeholder={t(lang, 'placeholder_target_customer')}
                    />
                 </div>
                 <div className="space-y-2">
-                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Current Alternatives</label>
+                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">{t(lang, 'label_current_alternatives')}</label>
                    <textarea 
                     value={formData.alternatives}
                     onChange={(e) => handleInputChange('alternatives', e.target.value)}
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-zinc-300 focus:outline-none focus:border-brand-yellow/50 min-h-[100px] resize-none"
-                    placeholder="How are customers solving this problem today? What are the gaps?"
+                    placeholder={t(lang, 'placeholder_current_alternatives')}
                    />
                 </div>
                 <div className="space-y-2">
-                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Proposed Solution</label>
+                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">{t(lang, 'label_proposed_solution')}</label>
                    <textarea 
                     value={formData.solution}
                     onChange={(e) => handleInputChange('solution', e.target.value)}
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-zinc-300 focus:outline-none focus:border-brand-yellow/50 min-h-[140px] resize-none"
-                    placeholder="Your solution and why it's 10x better than alternatives"
+                    placeholder={t(lang, 'placeholder_proposed_solution')}
                    />
                 </div>
                 <div className="space-y-2">
-                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Unique Advantage</label>
+                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">{t(lang, 'label_unique_advantage')}</label>
                    <input 
                     value={formData.advantage}
                     onChange={(e) => handleInputChange('advantage', e.target.value)}
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-6 py-4 text-zinc-300 focus:outline-none focus:border-brand-yellow/50"
-                    placeholder="What makes this defensible?"
+                    placeholder={t(lang, 'placeholder_unique_advantage')}
                    />
                 </div>
               </div>
@@ -375,65 +378,65 @@ Be specific with numbers. Under 250 words.`;
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   <h3 className="text-sm font-bold text-brand-yellow uppercase tracking-widest flex items-center gap-2">
-                    <Users className="w-4 h-4" /> Customer Profile
+                    <Users className="w-4 h-4" /> {t(lang, 'label_customer_profile')}
                   </h3>
                   <div className="space-y-2">
-                    <label className="text-[10px] text-zinc-600 font-bold uppercase">Customer Jobs</label>
+                    <label className="text-[10px] text-zinc-600 font-bold uppercase">{t(lang, 'label_customer_jobs')}</label>
                     <textarea 
                       value={formData.jobs}
                       onChange={(e) => handleInputChange('jobs', e.target.value)}
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-sm text-zinc-300 focus:outline-none focus:border-brand-yellow/50 min-h-[100px] resize-none"
-                      placeholder="What tasks/goals is your customer trying to accomplish?"
+                      placeholder={t(lang, 'placeholder_customer_jobs')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] text-zinc-600 font-bold uppercase">Customer Pains</label>
+                    <label className="text-[10px] text-zinc-600 font-bold uppercase">{t(lang, 'label_customer_pains')}</label>
                     <textarea 
                       value={formData.pains}
                       onChange={(e) => handleInputChange('pains', e.target.value)}
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-sm text-zinc-300 focus:outline-none focus:border-brand-yellow/50 min-h-[100px] resize-none"
-                      placeholder="Frustrations, risks, obstacles they face"
+                      placeholder={t(lang, 'placeholder_customer_pains')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] text-zinc-600 font-bold uppercase">Customer Gains</label>
+                    <label className="text-[10px] text-zinc-600 font-bold uppercase">{t(lang, 'label_customer_gains')}</label>
                     <textarea 
                       value={formData.gains}
                       onChange={(e) => handleInputChange('gains', e.target.value)}
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-sm text-zinc-300 focus:outline-none focus:border-brand-yellow/50 min-h-[100px] resize-none"
-                      placeholder="Desired outcomes and benefits they want"
+                      placeholder={t(lang, 'placeholder_customer_gains')}
                     />
                   </div>
                 </div>
                 <div className="space-y-6">
                   <h3 className="text-sm font-bold text-brand-blue uppercase tracking-widest flex items-center gap-2">
-                    <Zap className="w-4 h-4" /> Value Map
+                    <Zap className="w-4 h-4" /> {t(lang, 'label_value_map')}
                   </h3>
                   <div className="space-y-2">
-                    <label className="text-[10px] text-zinc-600 font-bold uppercase">Products & Services</label>
+                    <label className="text-[10px] text-zinc-600 font-bold uppercase">{t(lang, 'label_products_services')}</label>
                     <textarea 
                       value={formData.products}
                       onChange={(e) => handleInputChange('products', e.target.value)}
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-sm text-zinc-300 focus:outline-none focus:border-zinc-500 min-h-[100px] resize-none"
-                      placeholder="List your core offerings"
+                      placeholder={t(lang, 'placeholder_products_services')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] text-zinc-600 font-bold uppercase">Pain Relievers</label>
+                    <label className="text-[10px] text-zinc-600 font-bold uppercase">{t(lang, 'label_pain_relievers')}</label>
                     <textarea 
                       value={formData.painRelievers}
                       onChange={(e) => handleInputChange('painRelievers', e.target.value)}
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-sm text-zinc-300 focus:outline-none focus:border-zinc-500 min-h-[100px] resize-none"
-                      placeholder="How do you eliminate/reduce pains?"
+                      placeholder={t(lang, 'placeholder_pain_relievers')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] text-zinc-600 font-bold uppercase">Gain Creators</label>
+                    <label className="text-[10px] text-zinc-600 font-bold uppercase">{t(lang, 'label_gain_creators')}</label>
                     <textarea 
                       value={formData.gainCreators}
                       onChange={(e) => handleInputChange('gainCreators', e.target.value)}
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-sm text-zinc-300 focus:outline-none focus:border-zinc-500 min-h-[100px] resize-none"
-                      placeholder="How do you create customer gains?"
+                      placeholder={t(lang, 'placeholder_gain_creators')}
                     />
                   </div>
                 </div>
@@ -443,17 +446,17 @@ Be specific with numbers. Under 250 words.`;
             {activeTab === 'market' && (
               <div className="space-y-6">
                 <div className="space-y-2">
-                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Industry/Market</label>
+                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">{t(lang, 'label_industry_market')}</label>
                    <input 
                     value={formData.industry}
                     onChange={(e) => handleInputChange('industry', e.target.value)}
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-6 py-4 text-zinc-300 focus:outline-none focus:border-brand-yellow/50"
-                    placeholder="e.g. Digital Creative Services, Southeast Asia"
+                    placeholder={t(lang, 'placeholder_industry_market')}
                    />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.1em]">TAM (USD)</label>
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.1em]">{t(lang, 'label_market_tam')}</label>
                     <input 
                       type="number"
                       value={formData.tam}
@@ -461,10 +464,10 @@ Be specific with numbers. Under 250 words.`;
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-brand-yellow/50"
                       placeholder="100000000"
                     />
-                    <p className="text-[9px] text-zinc-600 italic">Total potential market if you captured 100%</p>
+                    <p className="text-[9px] text-zinc-600 italic">{t(lang, 'desc_tam')}</p>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.1em]">SAM (USD)</label>
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.1em]">{t(lang, 'label_market_sam')}</label>
                     <input 
                       type="number"
                       value={formData.sam}
@@ -472,10 +475,10 @@ Be specific with numbers. Under 250 words.`;
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-brand-yellow/50"
                       placeholder="10000000"
                     />
-                    <p className="text-[9px] text-zinc-600 italic">The portion of TAM you can target</p>
+                    <p className="text-[9px] text-zinc-600 italic">{t(lang, 'desc_sam')}</p>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.1em]">SOM (USD)</label>
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.1em]">{t(lang, 'label_market_som')}</label>
                     <input 
                       type="number"
                       value={formData.som}
@@ -483,44 +486,44 @@ Be specific with numbers. Under 250 words.`;
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-brand-yellow/50"
                       placeholder="500000"
                     />
-                    <p className="text-[9px] text-zinc-600 italic">What you can realistically capture in 3 years</p>
+                    <p className="text-[9px] text-zinc-600 italic">{t(lang, 'desc_som')}</p>
                   </div>
                 </div>
                 <div className="space-y-2">
-                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">Key Assumption</label>
+                   <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em] ml-1">{t(lang, 'label_key_assumption')}</label>
                    <textarea 
                     value={formData.assumption}
                     onChange={(e) => handleInputChange('assumption', e.target.value)}
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-zinc-300 focus:outline-none focus:border-brand-yellow/50 min-h-[80px] resize-none"
-                    placeholder="What's your main assumption behind these numbers?"
+                    placeholder={t(lang, 'placeholder_key_assumption')}
                    />
                 </div>
 
                 {/* Live Calculator Summary */}
                 <div className="mt-8 p-8 rounded-3xl bg-zinc-950 border border-zinc-800 grid grid-cols-2 lg:grid-cols-4 gap-8">
                   <div>
-                    <p className="text-[9px] text-zinc-600 font-bold uppercase mb-1">TOTAL TAM</p>
+                    <p className="text-[9px] text-zinc-600 font-bold uppercase mb-1">{t(lang, 'total_tam')}</p>
                     <p className="text-xl font-black text-white italic">{formatCurrency(formData.tam)}</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-zinc-600 font-bold uppercase mb-1">REACHABLE SAM</p>
+                    <p className="text-[9px] text-zinc-600 font-bold uppercase mb-1">{t(lang, 'reachable_sam')}</p>
                     <p className="text-xl font-black text-white italic">{formatCurrency(formData.sam)}</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-zinc-600 font-bold uppercase mb-1">SOM CAPTURE</p>
+                    <p className="text-[9px] text-zinc-600 font-bold uppercase mb-1">{t(lang, 'som_capture')}</p>
                     <p className="text-xl font-black text-brand-yellow italic">{formatCurrency(formData.som)}</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-zinc-600 font-bold uppercase mb-1">SOM/TAM RATIO</p>
+                    <p className="text-[9px] text-zinc-600 font-bold uppercase mb-1">{t(lang, 'som_tam_ratio')}</p>
                     <div className="flex items-center gap-2">
                       <p className="text-xl font-black text-white italic">{somTamRatio.toFixed(2)}%</p>
                       {somTamRatio > 5 ? (
                         <div className="flex items-center gap-1 text-[8px] text-orange-500 uppercase bg-orange-500/10 px-2 py-0.5 rounded-full">
-                          <AlertCircle className="w-2 h-2" /> Ambitious
+                          <AlertCircle className="w-2 h-2" /> {t(lang, 'stat_ambitious')}
                         </div>
                       ) : somTamRatio > 0 && somTamRatio < 1 ? (
                         <div className="flex items-center gap-1 text-[8px] text-green-500 uppercase bg-green-500/10 px-2 py-0.5 rounded-full">
-                          <CheckCircle2 className="w-2 h-2" /> Conservative
+                          <CheckCircle2 className="w-2 h-2" /> {t(lang, 'stat_conservative')}
                         </div>
                       ) : null}
                     </div>
@@ -539,9 +542,9 @@ Be specific with numbers. Under 250 words.`;
               ) : (
                 <Sparkles className="w-5 h-5" />
               )}
-              {activeTab === 'problem' && "Generate Problem Analysis"}
-              {activeTab === 'vpc' && "Generate VPC Analysis"}
-              {activeTab === 'market' && "Validate Market Sizing"}
+              {activeTab === 'problem' && t(lang, 'gen_problem')}
+              {activeTab === 'vpc' && t(lang, 'gen_vpc')}
+              {activeTab === 'market' && t(lang, 'gen_market')}
             </button>
           </div>
 
@@ -551,10 +554,10 @@ Be specific with numbers. Under 250 words.`;
               <div className="flex items-center justify-between mb-8">
                 <h3 className="text-xs font-black text-brand-yellow uppercase tracking-[0.2em] flex items-center gap-2 italic">
                   <Sparkles className="w-4 h-4" /> 
-                  AI Strategic Analysis
+                  {t(lang, 'ai_strat_analysis')}
                 </h3>
                 {aiAnalysis[activeTab] && (
-                  <span className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest italic">Generated just now</span>
+                  <span className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest italic">{t(lang, 'gen_now')}</span>
                 )}
               </div>
 
@@ -562,7 +565,7 @@ Be specific with numbers. Under 250 words.`;
                 {loading[activeTab] ? (
                   <div className="h-full flex flex-col items-center justify-center space-y-4 text-center opacity-40">
                     <div className="w-12 h-12 rounded-full border-2 border-brand-yellow/20 border-t-brand-yellow animate-spin" />
-                    <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest italic">Computing Strategy...</p>
+                    <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest italic">{t(lang, 'loading_ai')}</p>
                   </div>
                 ) : aiAnalysis[activeTab] ? (
                   <div className="space-y-6 text-zinc-300 leading-relaxed text-sm whitespace-pre-wrap font-medium font-inter overflow-y-auto max-h-[600px] pr-4 scrollbar-thin scrollbar-thumb-zinc-800">
@@ -574,8 +577,8 @@ Be specific with numbers. Under 250 words.`;
                       <Sparkles className="w-8 h-8 text-zinc-800" />
                     </div>
                     <div>
-                      <p className="text-zinc-500 font-bold text-xs uppercase tracking-widest italic mb-2">Awaiting Directive</p>
-                      <p className="text-[10px] text-zinc-600 max-w-[240px] mx-auto italic">Complete the form and click generate to receive a high-fidelity business engineering analysis.</p>
+                      <p className="text-zinc-500 font-bold text-xs uppercase tracking-widest italic mb-2">{t(lang, 'await_directive')}</p>
+                      <p className="text-[10px] text-zinc-600 max-w-[240px] mx-auto italic">{t(lang, 'await_desc')}</p>
                     </div>
                   </div>
                 )}
@@ -585,9 +588,9 @@ Be specific with numbers. Under 250 words.`;
                 <div className="mt-8 pt-8 border-t border-zinc-900 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest italic">Investor Grade Ready</span>
+                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest italic">{t(lang, 'investor_ready')}</span>
                   </div>
-                  <button className="text-[9px] text-brand-yellow font-bold uppercase tracking-widest hover:underline italic">Export Analysis</button>
+                  <button className="text-[9px] text-brand-yellow font-bold uppercase tracking-widest hover:underline italic">{t(lang, 'export_analysis')}</button>
                 </div>
               )}
             </div>
@@ -596,13 +599,13 @@ Be specific with numbers. Under 250 words.`;
             <div className="p-8 rounded-[40px] glass-card bg-zinc-900/20 border-zinc-800/50">
               <h4 className="text-[10px] font-black text-white uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                 <ChevronRight className="w-3 h-3 text-brand-yellow" />
-                Strategic Protocol
+                {t(lang, 'strat_protocol')}
               </h4>
               <ul className="space-y-3">
                 {[
-                  "Focus on data-driven assertions rather than vision statements.",
-                  "Quantify problem magnitude whenever possible.",
-                  "Be ultra-specific with target demographics."
+                  t(lang, 'tip_1'),
+                  t(lang, 'tip_2'),
+                  t(lang, 'tip_3')
                 ].map((tip, i) => (
                   <li key={i} className="text-[11px] text-zinc-500 italic flex gap-3">
                     <span className="text-brand-yellow font-bold">0{i+1}</span>

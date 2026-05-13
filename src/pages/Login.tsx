@@ -3,6 +3,8 @@ import { supabase } from '../lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import { Building2, LogIn, Loader2 } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useLang } from '../contexts/LangContext';
+import { t } from '../lib/i18n';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -10,6 +12,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const { lang } = useLang();
 
   // Check if already logged in → redirect
   useEffect(() => {
@@ -51,14 +54,14 @@ export default function Login() {
           </div>
           <div>
             <h1 className="text-xl font-black tracking-[0.2em] text-white uppercase italic">DAVSPLACE</h1>
-            <p className="text-xs text-zinc-500 font-bold tracking-widest uppercase italic mt-1">Digital Framework</p>
+            <p className="text-xs text-zinc-500 font-bold tracking-widest uppercase italic mt-1">{t(lang, 'login_subtitle')}</p>
           </div>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div className="space-y-2">
             <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block ml-1">
-              Email Address
+              {t(lang, 'login_email')}
             </label>
             <input 
               type="email"
@@ -72,7 +75,7 @@ export default function Login() {
 
           <div className="space-y-2">
             <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block ml-1">
-              Password
+              {t(lang, 'login_password')}
             </label>
             <input 
               type="password"
@@ -92,12 +95,12 @@ export default function Login() {
             {loading ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Verifying...</span>
+                <span>{t(lang, 'login_loading')}</span>
               </>
             ) : (
               <>
                 <LogIn className="w-5 h-5" />
-                <span>Authenticate</span>
+                <span>{t(lang, 'login_button')}</span>
               </>
             )}
           </button>
@@ -108,14 +111,14 @@ export default function Login() {
               animate={{ opacity: 1, y: 0 }}
               className="text-red-400 text-sm text-center italic font-medium"
             >
-              Invalid credentials. Contact your administrator.
+              {t(lang, 'login_error')}
             </motion.p>
           )}
         </form>
 
         <div className="mt-10 pt-8 border-t border-zinc-800/50 text-center">
           <p className="text-[10px] text-zinc-600 font-bold tracking-[0.2em] uppercase">
-            Access restricted to Davsplace Studio team
+            {t(lang, 'login_footer')}
           </p>
         </div>
       </div>
